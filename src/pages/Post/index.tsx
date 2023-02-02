@@ -1,3 +1,12 @@
+import { PostBody } from './PostBody'
+import { PostInfo } from './PostInfo'
+import { PostContainer } from './styles'
+
 export function Post() {
-  return <h1>opi</h1>
+  return (
+    <PostContainer>
+      <PostInfo />
+      <PostBody />
+    </PostContainer>
+  )
 }

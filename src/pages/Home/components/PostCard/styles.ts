@@ -31,7 +31,8 @@ export const PostCardContainer = styled.main`
       }
     }
 
-    p {
+    main {
+      width: 352px;
       height: 112px;
       margin-top: 1rem;
       color: ${(props) => props.theme['base-text']};
