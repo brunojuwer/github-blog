@@ -5,7 +5,9 @@ import {
   ChatCircle,
   GithubLogo,
 } from 'phosphor-react'
+import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
+import { IssueContext } from '../../../contexts/IssueContext'
 import {
   NavContainer,
   OwnerInfo,
@@ -14,6 +16,8 @@ import {
 } from './styles'
 
 export function PostInfo() {
+  const { issue } = useContext(IssueContext)
+
   return (
     <PostInfoContainer>
       <NavContainer>
@@ -33,7 +37,7 @@ export function PostInfo() {
 
       <div>
         <PostTitleContainer>
-          <h2>asdasd asdasdasdasdas asdasdasdasdsad</h2>
+          <h2>{issue.title}</h2>
         </PostTitleContainer>
         <OwnerInfo>
           <span>

@@ -1,31 +1,14 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import { IssueContext } from '../../../contexts/IssueContext'
 import { PostBodyContainer } from './styles'
 
-interface IssueType {
-  id: number
-  title: string
-  body: string
-}
-
 export function PostBody() {
-  const [markdown, setMarkdown] = useState<IssueType[]>([])
-
-  const url = 'https://api.github.com/repos/brunojuwer/todo-prisma-node/issues'
-
-  async function loadIssues() {
-    const response = await axios.get(url)
-    setMarkdown(response.data)
-  }
-
-  useEffect(() => {
-    loadIssues()
-  }, [])
+  const { issue } = useContext(IssueContext)
 
   return (
     <PostBodyContainer>
-      <ReactMarkdown>{markdown[0].body}</ReactMarkdown>
+      <ReactMarkdown>{issue.body}</ReactMarkdown>
     </PostBodyContainer>
   )
 }
