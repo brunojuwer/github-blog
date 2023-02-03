@@ -1,5 +1,3 @@
-import { formatDistanceToNow } from 'date-fns'
-import ptBR from 'date-fns/locale/pt-BR'
 import {
   ArrowSquareOut,
   Calendar,
@@ -10,6 +8,7 @@ import {
 import { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { IssueContext } from '../../../contexts/IssueContext'
+import { dateFormatter } from '../../../utils/dateFormatter'
 import {
   NavContainer,
   OwnerInfo,
@@ -48,16 +47,11 @@ export function PostInfo() {
           </span>
           <span>
             <Calendar size={22} weight="fill" color="#3A536B" />
-            <p>
-              {formatDistanceToNow(new Date(issue.created_at), {
-                addSuffix: true,
-                locale: ptBR,
-              })}
-            </p>
+            <p>{dateFormatter(new Date(issue.created_at))}</p>
           </span>
           <span>
             <ChatCircle size={22} weight="fill" color="#3A536B" />
-            <p>Comentários</p>
+            <p>{issue.comments} Comentários</p>
           </span>
         </OwnerInfo>
       </div>

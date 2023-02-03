@@ -7,6 +7,7 @@ interface Issue {
   body: string
   created_at: string
   html_url: string
+  comments: number
 }
 
 interface IssueContextType {
