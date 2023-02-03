@@ -8,7 +8,11 @@ export function PostBody() {
 
   return (
     <PostBodyContainer>
-      <ReactMarkdown linkTarget="_blank">{issue.body}</ReactMarkdown>
+      {issue.body === '' ? (
+        <h1>Escolha a issue</h1>
+      ) : (
+        <ReactMarkdown linkTarget="_blank">{issue.body}</ReactMarkdown>
+      )}
     </PostBodyContainer>
   )
 }
