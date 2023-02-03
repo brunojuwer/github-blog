@@ -6,12 +6,17 @@ interface Issue {
   title: string
   body: string
   created_at: string
+  html_url: string
 }
 
 interface IssueContextType {
   issues: Issue[]
   issue: Issue
+  filteredIssues: Issue[]
+  input: string
+  setInput: (input: string) => void
   addIssueToPost: (id: number) => void
+  searchIssues: (param: string) => void
 }
 
 interface IssueProviderProps {
@@ -23,12 +28,21 @@ export const IssueContext = createContext({} as IssueContextType)
 export function IssueProvider({ children }: IssueProviderProps) {
   const [issues, setIssues] = useState<Issue[]>([])
   const [issue, setIssue] = useState<Issue>({} as Issue)
+  const [filteredIssues, setFilteredIssues] = useState<Issue[]>([])
+  const [input, setInput] = useState('')
 
   const url = 'https://api.github.com/repos/brunojuwer/todo-prisma-node/issues'
 
   async function loadIssues() {
     const response = await axios.get(url)
     setIssues(response.data)
+  }
+
+  function searchIssues(param: string) {
+    const copyFilteredIssues = issues.filter((i) =>
+      i.title.toLowerCase().includes(param.toLowerCase()),
+    )
+    setFilteredIssues(copyFilteredIssues)
   }
 
   function addIssueToPost(id: number) {
@@ -47,7 +61,17 @@ export function IssueProvider({ children }: IssueProviderProps) {
   }, [])
 
   return (
-    <IssueContext.Provider value={{ issues, issue, addIssueToPost }}>
+    <IssueContext.Provider
+      value={{
+        issues,
+        issue,
+        addIssueToPost,
+        searchIssues,
+        filteredIssues,
+        input,
+        setInput,
+      }}
+    >
       {children}
     </IssueContext.Provider>
   )

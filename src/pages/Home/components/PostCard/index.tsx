@@ -6,7 +6,8 @@ import { PostCardContainer } from './styles'
 export function PostCard() {
   const navigate = useNavigate()
 
-  const { issues, addIssueToPost } = useContext(IssueContext)
+  const { issues, addIssueToPost, filteredIssues, input } =
+    useContext(IssueContext)
 
   function handleOpenPost(id: number) {
     addIssueToPost(id)
@@ -15,19 +16,37 @@ export function PostCard() {
 
   return (
     <PostCardContainer>
-      {issues.map((issue) => {
-        return (
-          <div onClick={() => handleOpenPost(issue.id)} key={issue.id}>
-            <header>
-              <h3>{issue.title}</h3>
-              <span>Há 1 dia</span>
-            </header>
-            <main>
-              <ReactMarkdown>{issue.body}</ReactMarkdown>
-            </main>
-          </div>
-        )
-      })}
+      {filteredIssues.length ? (
+        filteredIssues.map((issue) => {
+          return (
+            <div onClick={() => handleOpenPost(issue.id)} key={issue.id}>
+              <header>
+                <h3>{issue.title}</h3>
+                <span>Há 1 dia</span>
+              </header>
+              <main>
+                <ReactMarkdown>{issue.body}</ReactMarkdown>
+              </main>
+            </div>
+          )
+        })
+      ) : !input ? (
+        issues.map((issue) => {
+          return (
+            <div onClick={() => handleOpenPost(issue.id)} key={issue.id}>
+              <header>
+                <h3>{issue.title}</h3>
+                <span>Há 1 dia</span>
+              </header>
+              <main>
+                <ReactMarkdown>{issue.body}</ReactMarkdown>
+              </main>
+            </div>
+          )
+        })
+      ) : (
+        <h1>Nada Encontrado</h1>
+      )}
     </PostCardContainer>
   )
 }

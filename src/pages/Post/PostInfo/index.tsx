@@ -28,7 +28,7 @@ export function PostInfo() {
           </NavLink>
         </span>
         <span>
-          <a href="" target="_blank">
+          <a href={issue.html_url} target="_blank" rel="noreferrer">
             <p>VER NO GITHUB</p>
             <ArrowSquareOut size={16} weight="duotone" color="#3294F8" />
           </a>

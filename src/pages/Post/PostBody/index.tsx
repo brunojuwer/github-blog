@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import ReactMarkdown from 'react-markdown'
 import { IssueContext } from '../../../contexts/IssueContext'
 import { PostBodyContainer } from './styles'
 
@@ -8,7 +8,7 @@ export function PostBody() {
 
   return (
     <PostBodyContainer>
-      <ReactMarkdown>{issue.body}</ReactMarkdown>
+      <ReactMarkdown linkTarget="_blank">{issue.body}</ReactMarkdown>
     </PostBodyContainer>
   )
 }
