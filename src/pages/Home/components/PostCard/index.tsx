@@ -3,6 +3,9 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { useNavigate } from 'react-router-dom'
 import { IssueContext } from '../../../../contexts/IssueContext'
 import { PostCardContainer } from './styles'
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
+
 export function PostCard() {
   const navigate = useNavigate()
 
@@ -22,7 +25,12 @@ export function PostCard() {
             <div onClick={() => handleOpenPost(issue.id)} key={issue.id}>
               <header>
                 <h3>{issue.title}</h3>
-                <span>Há 1 dia</span>
+                <span>
+                  {formatDistanceToNow(new Date(issue.created_at), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
+                </span>
               </header>
               <main>
                 <ReactMarkdown>{issue.body}</ReactMarkdown>
@@ -36,7 +44,12 @@ export function PostCard() {
             <div onClick={() => handleOpenPost(issue.id)} key={issue.id}>
               <header>
                 <h3>{issue.title}</h3>
-                <span>Há 1 dia</span>
+                <span>
+                  {formatDistanceToNow(new Date(issue.created_at), {
+                    addSuffix: true,
+                    locale: ptBR,
+                  })}
+                </span>
               </header>
               <main>
                 <ReactMarkdown>{issue.body}</ReactMarkdown>

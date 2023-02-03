@@ -1,3 +1,5 @@
+import { formatDistanceToNow } from 'date-fns'
+import ptBR from 'date-fns/locale/pt-BR'
 import {
   ArrowSquareOut,
   Calendar,
@@ -46,7 +48,12 @@ export function PostInfo() {
           </span>
           <span>
             <Calendar size={22} weight="fill" color="#3A536B" />
-            <p>Há 1 dia</p>
+            <p>
+              {formatDistanceToNow(new Date(issue.created_at), {
+                addSuffix: true,
+                locale: ptBR,
+              })}
+            </p>
           </span>
           <span>
             <ChatCircle size={22} weight="fill" color="#3A536B" />
